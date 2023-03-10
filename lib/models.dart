@@ -130,7 +130,7 @@ enum WeatherCode {
   FreezingDrizzleDense(
       57, 'Freezing Drizzle: dense intensity', 'FreezingDrizzleDense.jpg'),
   RainSlight(61, 'Rain: Slight intensity', 'RainSlight.jpg'),
-  RainModerate(63, 'Rain: Moderate intensity', 'RainModerate.jpeg'),
+  RainModerate(63, 'Rain: Moderate intensity', 'RainModerate.jpg'),
   RainHeavy(65, 'Rain: Heavy intensity', 'RainHeavy.jpg'),
   FreezingRainLight(
       66, 'Freezing Rain: Light intensity', 'FreezingRainLight.jpg'),

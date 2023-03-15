@@ -27,7 +27,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         title: const Text("Settings"),
         actions: [
           IconButton(
-            onPressed: () => _onSave(state),
+            onPressed: () =>  _onSave(state),
             icon: const Icon(Icons.save),
           )
         ],

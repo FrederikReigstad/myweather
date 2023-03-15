@@ -57,7 +57,7 @@ class WeeklyForecastList extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           forecast.getWeekday(),
-                          style: textTheme.headline5,
+                          style: textTheme.headline6,
                         ),
                         const SizedBox(height: 10.0),
                         Text(forecast.weathercode.description),

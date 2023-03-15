@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import 'server.dart';
+import '../models/app_state.dart';
+import '../server.dart.bak';
 
 class WeeklyForecastList extends StatelessWidget {
   const WeeklyForecastList({Key? key}) : super(key: key);
@@ -8,7 +10,7 @@ class WeeklyForecastList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
-    final forecasts = Server.getDailyForecast();
+    final forecasts = Provider.of<AppState>(context).dailyForecast;
 
     return SliverList(
       delegate: SliverChildBuilderDelegate(
@@ -72,11 +74,11 @@ class WeeklyForecastList extends StatelessWidget {
                         style: textTheme.subtitle1,
                       ),
                       Text(
-                        '${forecast.windspeed_max} Max m/s',
+                        '${forecast.windspeed_10m_max} Max m/s',
                         style: textTheme.subtitle1,
                       ),
                       Text(
-                        '${forecast.windspeed_min} Gust m/s',
+                        '${forecast.windgusts_10m_max} Gust m/s',
                         style: textTheme.subtitle1,
                       ),
                     ],

@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-import 'models.dart';
-import 'server.dart';
+import '../models/app_state.dart';
+import '../models/hourly_forecast.dart';
 
 class WindSpeedList extends StatelessWidget {
   const WindSpeedList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final forecast = Server.getHourlyForecast();
+    final state = Provider.of<AppState>(context);
+    final forecast = state.hourlyForecast;
     return SliverList(
       delegate: SliverChildListDelegate.fixed([
         Card(child: WindChart(forecast)),

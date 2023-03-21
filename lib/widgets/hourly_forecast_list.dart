@@ -61,6 +61,7 @@ class PrecipitationChart extends StatelessWidget {
       primaryYAxis: NumericAxis(title: AxisTitle(text: 'mm')),
       series: [
         ColumnSeries(
+          // forecast.toList takes the houres we plot in the graff
           dataSource: forecast.take(24).toList(),
           xValueMapper: (datum, index) => datum.time,
           yValueMapper: (datum, index) => datum.precipitation,

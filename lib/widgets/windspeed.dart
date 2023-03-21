@@ -36,7 +36,7 @@ class WindChart extends StatelessWidget {
       legend: Legend(isVisible: true, position: LegendPosition.bottom),
       series: [
         SplineSeries(
-            dataSource: forecast,
+            dataSource: forecast.take(24).toList(),
             xValueMapper: (element, index) => element.time,
             yValueMapper: (element, index) => element.windspeed_10m,
             legendItemText: 'Air Speed'),
@@ -57,7 +57,7 @@ class WindDirectionChart extends StatelessWidget {
       primaryYAxis: NumericAxis(title: AxisTitle(text: '°Grader')),
       series: [
         SplineSeries(
-            dataSource: forecast,
+            dataSource: forecast.take(24).toList(),
             xValueMapper: (element, index) => element.time,
             yValueMapper: (element, index) => element.winddirection_10m,
             legendItemText: 'Wind Direction'),

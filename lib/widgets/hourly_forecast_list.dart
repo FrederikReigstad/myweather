@@ -35,12 +35,12 @@ class TemperatureChart extends StatelessWidget {
       legend: Legend(isVisible: true, position: LegendPosition.bottom),
       series: [
         SplineSeries(
-            dataSource: forecast,
+            dataSource: forecast.take(24).toList(),
             xValueMapper: (element, index) => element.time,
             yValueMapper: (element, index) => element.temperature_2m,
             legendItemText: 'Air temp'),
         SplineSeries(
-            dataSource: forecast,
+            dataSource: forecast.take(24).toList(),
             xValueMapper: (element, index) => element.time,
             yValueMapper: (element, index) => element.apparent_temperature,
             legendItemText: 'Feels-like'),
@@ -61,7 +61,7 @@ class PrecipitationChart extends StatelessWidget {
       primaryYAxis: NumericAxis(title: AxisTitle(text: 'mm')),
       series: [
         ColumnSeries(
-          dataSource: forecast.take(12).toList(),
+          dataSource: forecast.take(24).toList(),
           xValueMapper: (datum, index) => datum.time,
           yValueMapper: (datum, index) => datum.precipitation,
           pointColorMapper: (datum, index) => Color.alphaBlend(

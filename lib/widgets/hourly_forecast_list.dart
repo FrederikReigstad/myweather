@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:Weather/models/hourly_forecast.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 import '../models/app_state.dart';
 import '../server.dart.bak';
@@ -30,7 +32,7 @@ class TemperatureChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return SfCartesianChart(
       title: ChartTitle(text: 'Temperature'),
-      primaryXAxis: DateTimeAxis(),
+      primaryXAxis: DateTimeAxis(dateFormat: DateFormat('H')),
       primaryYAxis: NumericAxis(title: AxisTitle(text: '°C')),
       legend: Legend(isVisible: true, position: LegendPosition.bottom),
       series: [
@@ -57,7 +59,7 @@ class PrecipitationChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return SfCartesianChart(
       title: ChartTitle(text: 'Precipitation'),
-      primaryXAxis: DateTimeAxis(),
+      primaryXAxis: DateTimeAxis(dateFormat: DateFormat('H')),
       primaryYAxis: NumericAxis(title: AxisTitle(text: 'mm')),
       series: [
         ColumnSeries(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
@@ -31,7 +32,7 @@ class WindChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return SfCartesianChart(
       title: ChartTitle(text: 'Wind Speed'),
-      primaryXAxis: DateTimeAxis(),
+      primaryXAxis: DateTimeAxis(dateFormat: DateFormat('H')),
       primaryYAxis: NumericAxis(title: AxisTitle(text: 'm/s')),
       legend: Legend(isVisible: true, position: LegendPosition.bottom),
       series: [
@@ -53,7 +54,7 @@ class WindDirectionChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return SfCartesianChart(
       title: ChartTitle(text: 'Wind Direction'),
-      primaryXAxis: DateTimeAxis(),
+      primaryXAxis: DateTimeAxis(dateFormat: DateFormat('H')),
       primaryYAxis: NumericAxis(title: AxisTitle(text: '°Grader')),
       series: [
         SplineSeries(

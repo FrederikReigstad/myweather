@@ -2,7 +2,7 @@ import 'package:Weather/widgets/hourly_forecast_list.dart';
 
 class HourlyForecast {
   static const timeKey = 'time';
-  static const temperatureKey = 'apparent_temperature';
+  static const temperatureKey = 'temperature_2m';
   static const apparentTemperatureKey = 'apparent_temperature';
   static const precipitationKey = 'precipitation';
   static const precipitationProbabilityKey = 'precipitation_probability';

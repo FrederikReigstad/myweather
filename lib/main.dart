@@ -1,10 +1,12 @@
 import 'package:Weather/repositories/forecast_repository.dart';
 import 'package:Weather/repositories/geocode_repository.dart';
-import 'package:Weather/widgets/forecast_screen.dart';
+import 'package:Weather/utils/scroll_wrapper.dart';
+import 'package:Weather/widgets/responsive_scaffold.dart';
 import 'package:Weather/widgets/weekly_forecast_list.dart';
 import 'package:flutter/material.dart';
 import 'package:Weather/widgets/windspeed.dart';
 import 'package:provider/provider.dart';
+import 'package:responsive_framework/responsive_wrapper.dart';
 
 import 'models/app_state.dart';
 import 'widgets/hourly_forecast_list.dart';
@@ -38,7 +40,15 @@ class HorizonsApp extends StatelessWidget {
         // platform they are using.
         scrollBehavior: const ConstantScrollBehavior(),
         title: "Weather",
-        home: ForecastScreen(),
+        builder: (context, child) => ResponsiveWrapper.builder(
+          StretchingScrollWrapper.builder(context, child!),
+          defaultScale: true,
+          breakpoints: [
+            const ResponsiveBreakpoint.autoScale(800, name: TABLET),
+            const ResponsiveBreakpoint.resize(1000, name: DESKTOP),
+          ],
+        ),
+        home: ResponsiveScaffold(),
       ),
     );
   }

@@ -30,6 +30,7 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
   @override
   Widget build(BuildContext context) {
     final responce = ResponsiveWrapper.of(context);
+    // Web
     if (responce.isLargerThan(TABLET)) {
       return Scaffold(
           body: Row(
@@ -60,7 +61,9 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
               onSettings: () => Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => const SettingsScreen(),
                   ))));
-    } else {
+    }
+    // Android
+    else {
       return Scaffold(
           body: _buildBodyAndroid(context),
           bottomNavigationBar: BottomNavigationBar(

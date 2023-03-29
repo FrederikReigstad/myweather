@@ -32,66 +32,34 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
     final responce = ResponsiveWrapper.of(context);
     if (responce.isLargerThan(TABLET)) {
       return Scaffold(
-        body: Row(
-          children: [
-            NavigationRail(
-              selectedIndex: _selectedIndex,
-              onDestinationSelected: (index) {
-                setState(() {
-                  _selectedIndex = index;
-                });
-              },
-              extended: true,
-              destinations: [
-                NavigationRailDestination(
-                    icon: Icon(Icons.calendar_view_week),
-                    label: Text('Weekly')),
-                NavigationRailDestination(
-                    icon: Icon(Icons.calendar_view_day), label: Text('Hourly')),
-                NavigationRailDestination(
-                    icon: Icon(Icons.wind_power), label: Text('Wind Speed')),
-              ],
-            ),
-            Expanded(child: _buildBodyWeb(context)),
-          ],
-        ),
-
-        appBar: AppBar(
-          backgroundColor: Colors.teal[800],
-          actions: [
-            IconButton(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const SettingsScreen(),
-                  ));
+          body: Row(
+            children: [
+              NavigationRail(
+                selectedIndex: _selectedIndex,
+                onDestinationSelected: (index) {
+                  setState(() {
+                    _selectedIndex = index;
+                  });
                 },
-                icon: const Icon(Icons.settings))
-          ],
-          flexibleSpace: FlexibleSpaceBar(
-            title: const Text("Weather"),
-            stretchModes: const [
-              StretchMode.zoomBackground,
-              StretchMode.fadeTitle,
-              StretchMode.blurBackground,
+                extended: true,
+                destinations: [
+                  NavigationRailDestination(
+                      icon: Icon(Icons.calendar_view_week),
+                      label: Text('Weekly')),
+                  NavigationRailDestination(
+                      icon: Icon(Icons.calendar_view_day),
+                      label: Text('Hourly')),
+                  NavigationRailDestination(
+                      icon: Icon(Icons.wind_power), label: Text('Wind Speed')),
+                ],
+              ),
+              Expanded(child: _buildBodyWeb(context)),
             ],
-            background: DecoratedBox(
-              position: DecorationPosition.foreground,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.bottomCenter,
-                  end: Alignment.center,
-                  colors: <Color>[Colors.teal[800]!, Colors.transparent],
-                ),
-              ),
-              child: Image.asset(
-                'assets/header.jpg',
-                fit: BoxFit.cover,
-              ),
-            ),
           ),
-        ),
-
-      );
+          appBar: AppBarWeb(
+              onSettings: () => Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const SettingsScreen(),
+                  ))));
     } else {
       return Scaffold(
           body: _buildBodyAndroid(context),

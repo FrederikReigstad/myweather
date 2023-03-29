@@ -10,6 +10,7 @@ import '../repositories/forecast_repository.dart';
 import '../utils/position.dart';
 import 'forecast_app_bar.dart';
 import 'hourly_forecast_list.dart';
+import 'settings_screen.dart';
 
 class ResponsiveScaffold extends StatefulWidget {
   const ResponsiveScaffold({Key? key}) : super(key: key);
@@ -31,7 +32,6 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
     final responce = ResponsiveWrapper.of(context);
     if (responce.isLargerThan(TABLET)) {
       return Scaffold(
-
         body: Row(
           children: [
             NavigationRail(
@@ -52,50 +52,98 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
                     icon: Icon(Icons.wind_power), label: Text('Wind Speed')),
               ],
             ),
-            Expanded(child: _buildBody(context)),
+            Expanded(child: _buildBodyWeb(context)),
           ],
         ),
+
+        appBar: AppBar(
+          backgroundColor: Colors.teal[800],
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const SettingsScreen(),
+                  ));
+                },
+                icon: const Icon(Icons.settings))
+          ],
+          flexibleSpace: FlexibleSpaceBar(
+            title: const Text("Weather"),
+            stretchModes: const [
+              StretchMode.zoomBackground,
+              StretchMode.fadeTitle,
+              StretchMode.blurBackground,
+            ],
+            background: DecoratedBox(
+              position: DecorationPosition.foreground,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.center,
+                  colors: <Color>[Colors.teal[800]!, Colors.transparent],
+                ),
+              ),
+              child: Image.asset(
+                'assets/header.jpg',
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+        ),
+
       );
     } else {
       return Scaffold(
-        body: _buildBody(context),
+          body: _buildBodyAndroid(context),
           bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        items: const [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.calendar_view_week), label: 'Weekly'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.calendar_view_day), label: 'Hourly'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.wind_power), label: 'Wind Speed'),
-        ],
-        onTap: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-      ));
+            currentIndex: _selectedIndex,
+            items: const [
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.calendar_view_week), label: 'Weekly'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.calendar_view_day), label: 'Hourly'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.wind_power), label: 'Wind Speed'),
+            ],
+            onTap: (index) {
+              setState(() {
+                _selectedIndex = index;
+              });
+            },
+          ));
     }
   }
-  Widget _buildBody(BuildContext context) {
+
+  Widget _buildBodyAndroid(BuildContext context) {
     final state = Provider.of<AppState>(context);
     final repo = Provider.of<ForecastRepository>(context);
     return FutureBuilder(
       future: _restore(state, repo),
-      builder: (context, snapshot) =>
-          RefreshIndicator(
-            onRefresh: () async {
-              await _refresh(state, repo);
-              setState(() {});
-            },
-            child: CustomScrollView(
-              slivers: <Widget>[
-                const ForecastAppBar(),
+      builder: (context, snapshot) => RefreshIndicator(
+        onRefresh: () async {
+          await _refresh(state, repo);
+          setState(() {});
+        },
+        child: CustomScrollView(
+          slivers: <Widget>[
+            const ForecastAppBar(),
+            _buildTab(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildBodyWeb(BuildContext context) {
+    final state = Provider.of<AppState>(context);
+    final repo = Provider.of<ForecastRepository>(context);
+    return FutureBuilder(
+        future: _restore(state, repo),
+        builder: (context, snapshot) => Column(
+              children: [
                 _buildTab(),
               ],
-            ),
-          ),
-    );
+            ));
   }
 
   Future _restore(AppState state, ForecastRepository repo) async {

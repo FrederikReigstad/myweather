@@ -32,7 +32,7 @@ class WindChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return SfCartesianChart(
       title: ChartTitle(text: 'Wind Speed'),
-      primaryXAxis: DateTimeAxis(dateFormat: DateFormat('H')),
+      primaryXAxis: DateTimeAxis(dateFormat: DateFormat('H'),interval: 2.00),
       primaryYAxis: NumericAxis(title: AxisTitle(text: 'm/s')),
       legend: Legend(isVisible: true, position: LegendPosition.bottom),
       series: [
@@ -54,7 +54,7 @@ class WindDirectionChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return SfCartesianChart(
       title: ChartTitle(text: 'Wind Direction'),
-      primaryXAxis: DateTimeAxis(dateFormat: DateFormat('H')),
+      primaryXAxis: DateTimeAxis(dateFormat: DateFormat('H'),interval: 2.00),
       primaryYAxis: NumericAxis(title: AxisTitle(text: '°Grader')),
       series: [
         SplineSeries(

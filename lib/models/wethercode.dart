@@ -13,7 +13,7 @@
 // 95 * 	Thunderstorm: Slight or moderate
 // 96, 99 * 	Thunderstorm with slight and heavy hail
 enum WeatherCode {
-  ClearSky(0, 'Clear sky', 'assets/clearsky.jpg'),
+  ClearSky(0, 'Clear sky', 'clearsky.jpg'),
   MainlyClear(1, 'Mainly clear', 'Mainlyclear.jpg'),
   PartlyCloudy(2, 'Partly cloudy', 'Partlycloudy.jpg'),
   Overcast(3, 'Overcast', 'Overcast.jpg'),
